@@ -1,24 +1,60 @@
-# Compiled class file
-*.class
+# Build output
+target/
+build/
+out/
 
-# Log file
+# Maven wrapper jar (should not be committed)
+.mvn/wrapper/maven-wrapper.jar
+
+# Logs
 *.log
 
-# BlueJ files
-*.ctxt
+# JVM crash logs
+hs_err_pid*
+replay_pid*
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# OS generated files
+.DS_Store
+Thumbs.db
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
+# IDE — IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# IDE — Eclipse / STS
+.classpath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# IDE — VS Code
+.vscode/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Temporary files
+*.tmp
+*.swp
+
+# Archives
 *.zip
+*.tar
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Ignore generated HELP documentation
+HELP.md
+
+# Allow build folders inside source directories (rare case)
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
