@@ -25,4 +25,3 @@ public class LogAnalysisController {
         return ResponseEntity.ok(responseDto);
     }
 }
-

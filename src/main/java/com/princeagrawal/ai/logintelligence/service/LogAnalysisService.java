@@ -18,19 +18,14 @@ public class LogAnalysisService {
     }
 
     public LogResponseDto analyzeLogs(String logs) {
-        //Call validator
+        // Call validator
 
-        //Build prompt
+        // Build prompt
         String prompt = LogPromptBuilder.buildPrompt(logs);
 
-        //Call LLM
-        String response = chatClient.prompt()
-                .user(prompt)
-                .call()
-                .content();
-        //Response mapping
+        // Call LLM
+        String response = chatClient.prompt().user(prompt).call().content();
+        // Response mapping
         return responseMapper.mapToLogResponseDto(response);
     }
 }
-
-
