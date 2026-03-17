@@ -4,5 +4,5 @@ import lombok.*;
 
 @Data
 public class LogRequestDto {
-    private String logs;
+    private String errorLog;
 }

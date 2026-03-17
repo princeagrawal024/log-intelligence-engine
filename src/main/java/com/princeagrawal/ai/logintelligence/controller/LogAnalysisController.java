@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.princeagrawal.ai.logintelligence.service.LogAnalysisService;
 
+import static com.princeagrawal.ai.logintelligence.validation.LogInputValidator.validateInputErrorLog;
+
 @RestController
 @RequestMapping("/api/logs")
 public class LogAnalysisController {
@@ -21,7 +23,8 @@ public class LogAnalysisController {
 
     @PostMapping("/analyze")
     public ResponseEntity<LogResponseDto> analyze(@RequestBody LogRequestDto request) {
-        LogResponseDto responseDto = service.analyzeLogs(request.getLogs());
+        validateInputErrorLog(request.getErrorLog());
+        LogResponseDto responseDto = service.analyzeLogs(request.getErrorLog());
         return ResponseEntity.ok(responseDto);
     }
 }

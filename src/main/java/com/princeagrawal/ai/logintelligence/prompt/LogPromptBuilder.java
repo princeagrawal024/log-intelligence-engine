@@ -8,11 +8,24 @@ public class LogPromptBuilder {
         return """
                 You are a senior SRE engineer.
 
-                Analyze the following application logs and find:
+                Analyze the following logs and return STRICT JSON ONLY.
 
-                1 Root cause
-                2 Error summary
-                3 Possible fix
+                Do NOT add explanation.
+                Do NOT add markdown.
+                Do NOT add extra text.
+
+                Return response in EXACT format:
+
+                {
+                  "rootCause": "...",
+                  "possibleReasons": "...",
+                  "suggestedFix": "..."
+                }
+
+                Rules:
+                • rootCause → 1–2 lines
+                • possibleReasons → bullet points in single string
+                • suggestedFix → actionable steps
 
                 Logs:
                 """ + logs;
