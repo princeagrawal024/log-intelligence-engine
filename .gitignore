@@ -3,6 +3,12 @@ target/
 build/
 out/
 
+# Ignore only sensitive configs
+application.properties
+application-*.properties
+application.yml
+application-*.yml
+
 # Maven wrapper jar (should not be committed)
 .mvn/wrapper/maven-wrapper.jar
 
