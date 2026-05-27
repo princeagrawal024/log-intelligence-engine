@@ -24,7 +24,12 @@ public class LogAnalysisController {
     @PostMapping("/analyze")
     public ResponseEntity<LogResponseDto> analyze(@RequestBody LogRequestDto request) {
         validateInputErrorLog(request.getErrorLog());
+        if (request.getErrorLog() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        System.out.println(request);
         LogResponseDto responseDto = service.analyzeLogs(request.getErrorLog());
+        System.out.println(responseDto);
         return ResponseEntity.ok(responseDto);
     }
 }
