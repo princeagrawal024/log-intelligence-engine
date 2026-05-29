@@ -14,10 +14,10 @@ public class ResponseMapper {
         try {
             log.debug("Raw LLM response: {}", response);
             String clean = extractJson(response);
-            log.debug("Clean JSON: {}", clean);
+            log.info("Clean JSON: {}", clean);
             return objectMapper.readValue(clean, LogResponseDto.class);
         } catch (Exception e) {
-            log.error("Parsing failed", e);
+            log.info("Parsing failed", e);
             return LogResponseDto.builder().rootCause("Failed to parse LLM response")
                     .possibleReasons("Invalid JSON returned by model")
                     .suggestedFix("Check prompt or add stricter output format").build();
@@ -25,6 +25,7 @@ public class ResponseMapper {
     }
 
     private String extractJson(String response) {
+        System.out.println("llmResponse: "+response);
         int start = response.indexOf("{");
         int end = response.lastIndexOf("}");
         if (start != -1 && end != -1 && end > start) {

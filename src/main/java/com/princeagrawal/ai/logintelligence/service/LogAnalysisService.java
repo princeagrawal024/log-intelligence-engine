@@ -11,19 +11,38 @@ import static com.princeagrawal.ai.logintelligence.config.CacheConfig.LOGS_CACHE
 
 @Service
 public class LogAnalysisService {
-    private final RequestMapper requestMapper;
-    private final ResponseMapper responseMapper;
-    private final ChatClient chatClient;
 
-    public LogAnalysisService(RequestMapper requestMapper, ResponseMapper responseMapper, ChatClient.Builder builder) {
+    private RequestMapper requestMapper;
+    private ResponseMapper responseMapper;
+    private ChatClient chatClient;
+
+    public LogAnalysisService(RequestMapper requestMapper,
+                              ResponseMapper responseMapper,
+                              ChatClient.Builder builder) {
         this.requestMapper = requestMapper;
         this.responseMapper = responseMapper;
-        this.chatClient = builder.build();
+        ChatClient tempClient = builder.build();
+
+        this.chatClient = tempClient;
     }
-    @Cacheable(LOGS_CACHE)
+
+    @Cacheable(value = LOGS_CACHE)
     public LogResponseDto analyzeLogs(String inputErrorLog) {
-        String requestPrompt = requestMapper.mapInputErrorLogToRequestDto(inputErrorLog);
-        String response = chatClient.prompt().user(requestPrompt).call().content();
-        return responseMapper.mapToLogResponseDto(response);
+        if (inputErrorLog == null) {
+            inputErrorLog = "";
+        }
+        inputErrorLog = inputErrorLog.trim();
+        String a = requestMapper.mapInputErrorLogToRequestDto(inputErrorLog);
+        String response = chatClient.prompt().user(a).call().content();
+        System.out.println("AI Response : " + response);
+
+        if (response == null || response.equals("")) {
+            return new LogResponseDto();
+        }
+
+        LogResponseDto dto = responseMapper.mapToLogResponseDto(response);
+        dto = dto;
+
+        return dto;
     }
 }
